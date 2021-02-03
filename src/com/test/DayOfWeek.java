@@ -1,4 +1,4 @@
-package com.javarush.test;
+package com.test;
 
 public class DayOfWeek {
     private String title;

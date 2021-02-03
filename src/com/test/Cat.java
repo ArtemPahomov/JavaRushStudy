@@ -1,4 +1,4 @@
-package com.javarush.test;
+package com.test;
 
 import java.io.IOException;
 import java.util.*;
