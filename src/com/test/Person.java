@@ -1,19 +1,24 @@
 package com.test;
 
-public class Person {
-    String name;
-    int age;
-
-    public void initialize(String name, int age){
-        this.name=name;
-        this.age=age;
-
+interface Person {
+    class User implements Person{
+        void live(){
+            System.out.println("I usually just live.");
+        }
     }
-
-
-    public static void main(String[] args) {
-        Person person=new Person();
-        person.initialize("asd",23);
+    class Loser implements Person{
+        void doNothing(){
+            System.out.println("i usually do nothing");
+        }
     }
-
+    class Coder implements Person{
+        void writeCode(){
+            System.out.println("I usually write code");
+        }
+    }
+    class Proger implements Person{
+        void enjoy(){
+            System.out.println("It's a wonderful life!");
+        }
+    }
 }
