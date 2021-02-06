@@ -15,7 +15,7 @@ public class Film {
             if(movie==null){
                 return;
             }
-            System.out.println(movie.getClass());
+            System.out.println(movie.getClass().getSimpleName());
         }
     }
     static class MovieFactory{
