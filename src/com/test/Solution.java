@@ -1,17 +1,25 @@
 package com.test;
 
 
-public class Solution {
-    public static void main(String[] args) {
-   Computer computer =new Computer(new Keyboard(),new CompMouse(),new Monitor());
-   if(isWork(computer.getKeyboard())&&isWork(computer.getCompMouse())&&isWork(computer.getMonitor())){
-       System.out.println("Work");
-   }
-    }
+import java.util.HashMap;
+import java.util.Map;
 
-    public static boolean isWork(CompItem item){
-        System.out.println(item.getName());
-        return item.getName() !=null&&item.getName().length()>4;
+public class Solution {
+     public static class Cat{
+         public String name;
+     }
+
+    private static Cat cat;
+
+    static {
+         Cat cat = new Cat();
+         cat.name = "пушок";
+         Solution.cat = cat;
+        System.out.println(cat.name);
+     }
+
+    public static void main(String[] args) {
+        System.out.println(cat);
     }
 }
 
