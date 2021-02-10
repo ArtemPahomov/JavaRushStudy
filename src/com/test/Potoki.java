@@ -2,8 +2,8 @@ package com.test;
 
 public class Potoki {
     public static void main(String[] args) {
-        TestThread thread = new TestThread();
-        new Thread(thread).start();
+
+        new Thread(new TestThread()).start();
     }
     public static class TestThread implements Runnable{
 
