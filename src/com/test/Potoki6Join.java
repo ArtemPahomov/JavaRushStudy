@@ -15,6 +15,11 @@ public class Potoki6Join {
 
     public static void printList(List<String> list, String threadName) {
         for (String item : list) {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             System.out.println(String.format("%s : %s", threadName, item));
         }
     }
