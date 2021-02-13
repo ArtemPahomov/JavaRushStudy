@@ -10,7 +10,7 @@ public class Potoki30Synchronized {
 
     public static class Note {
 
-        public final List<String> notes = new ArrayList<String>();
+        public volatile List<String> notes = new ArrayList<String>();
 
         public void addNote(int index, String note) {
             System.out.println("Сейчас будет добавлена заметка [" + note + "] На позицию " + index);
