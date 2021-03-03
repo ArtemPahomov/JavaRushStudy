@@ -3,6 +3,8 @@ package com.test.fishingstore;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 public class FishingStore {
@@ -13,19 +15,44 @@ public class FishingStore {
         FishingGoods fishingGoods1 = new FishingGoods("rod","spin",3,5);
         FishingGoods fishingGoods2 = new FishingGoods("bait","jig",10,4);
         FishingGoods fishingGoods4 = new FishingGoods("bait","bait",3,9);
-        FishingGoods fishingGoods3 = new FishingGoods("reel","iner",5,7);
+        FishingGoods fishingGoods3 = new FishingGoods("reel","inner",5,7);
         list.add(fishingGoods1);
         list.add(fishingGoods2);
         list.add(fishingGoods3);
         list.add(fishingGoods4);
 
-        System.out.println(countType(list));
-        System.out.println(totalCount(list));
-        System.out.println(totalPrice(list));
-        System.out.println("Средняя стоимость = " + totalPrice(list)/totalCount(list));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Что бы узнать :\n" +
+                "Сколько типов товаров магазине - введите countType\n" +
+                "Общее количество товаров - введите totalCount\n"+
+                "Среднюю стоимость товара - введите averagePrice\n"+
+                "Среднюю стоимость товара каждого типа - введите averagePriceType\n"+
+                "Для завершения - введите exit");
 
-
-    }
+        String command = reader.readLine();
+        while (!command.equals("exit"))
+            switch (command) {
+                case "countType":
+                    System.out.println("Типов товаров - " + countType(list));
+                    command = reader.readLine();
+                    break;
+                case "totalCount":
+                    System.out.println("Общее количество товара - " + totalCount(list) + ".");
+                    command = reader.readLine();
+                    break;
+                case "averagePrice":
+                    System.out.println("Средняя стоимость = " + totalPrice(list) / totalCount(list));
+                    command = reader.readLine();
+                    break;
+                case "averagePriceType":
+                    averagePriceType(list);
+                    command = reader.readLine();
+                    break;
+                default:
+                    System.out.println("Команда не корректна");
+                    command = reader.readLine();
+            }
+        }
 
     public static List<FishingGoods> createList() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -78,7 +105,30 @@ public class FishingStore {
     }
 
     public static void averagePriceType(List<FishingGoods> list) {
-        List<FishingGoods> listType = new ArrayList<>();
+        List<FishingGoods> typeList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            typeList.add(list.get(i));
+        }
 
+        for (int i = 0; i < list.size(); i++) {
+            double totalTypeCount = 0;
+            double totalTypePrice = 0;
+            int comp = 0;
+            for (int k = 0; k < typeList.size(); k++) {
+                if (list.get(i).getType().equals(typeList.get(k).getType())) {
+                    totalTypeCount += typeList.get(k).getCount();
+                    totalTypePrice += typeList.get(k).price * typeList.get(k).count;
+                    typeList.remove(k);
+                    k--;
+                    comp++;
+                }
+            }
+            if (comp != 0) {
+                double value = totalTypePrice/totalTypeCount;
+                BigDecimal res = new BigDecimal(value);
+                res = res.setScale(2, RoundingMode.DOWN);
+                System.out.println("Средняя стоимость товара типа " + list.get(i).type + " = " + res);
+            }
+        }
     }
 }
