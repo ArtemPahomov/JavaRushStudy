@@ -10,9 +10,9 @@ public class LocalThread {
             threadLocal.set(Thread.currentThread().getId());
             System.out.println("Thread finished id = " + Thread.currentThread().getId() + " threadLocal var = " + Thread.currentThread().getId());
         };
-        Thread myThread1 = new Thread(runnable,"My thread1");
+        Thread myThread = new Thread(runnable,"My thread");
         Thread myThread2 = new Thread(runnable,"My thread2");
-        myThread1.start();
+        myThread.start();
         myThread2.start();
 
     }
